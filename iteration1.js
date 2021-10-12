@@ -18,20 +18,29 @@ let nameInput=document.querySelector('.ejercicioDosUno__input');
 let getData=async()=>{
 let result=await fetch(`https://api.nationalize.io?name=${nameInput.value}`);
 let resultToJson=await result.json();
-let nameDataHTML=`el nombre <p>${resultToJson.name}</p>
-    tiene un <p>${resultToJson.country[0].probability}</p> porciento de ser 
-    <p>${resultToJson.country[0].country_id}</p> y un <p>${resultToJson.country[1].probability}</p> porciento de ser 
-    <p>${resultToJson.country[1].country_id}</p>`
+let nameDataHTML=`el nombre <p class="eliminame">${resultToJson.name}</p>
+    tiene un <p class="eliminame">${resultToJson.country[0].probability}</p> porciento de ser 
+    <p class="eliminame">${resultToJson.country[0].country_id}</p> y un <p class="eliminame">${resultToJson.country[1].probability}</p> porciento de ser 
+    <p class="eliminame">${resultToJson.country[1].country_id}</p>`
 
            newDivDos.innerHTML=nameDataHTML
 }
 
 document.querySelector('.ejercicioDosUno__btn').addEventListener('click',getData)
+//////////////
 
+
+function eliminar(){
+    let listaP=document.querySelectorAll('.eliminame');
+    for (let i = 0; i < listaP.length; i++) {
+        listaP[i].remove();
+    }
+    return listaP
+}
+document.querySelector('.eliminarP').addEventListener('click',eliminar)
 
 /////////S
-//iteration2
-//TODO ejercicio 1 de esta iteration
+
 const newRickAndMorty__container=document.querySelector('.RickAndMorty__container');
 const getAllDataRickAndMorty= async()=>{
     const result=await fetch(`https://rickandmortyapi.com/api/character`);
